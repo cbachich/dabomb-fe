@@ -7,18 +7,24 @@ function initVideoPlayer() {
   videoPlayer.controls = false;
 }
 
-function togglePlayPause() {
+function playPause() {
   var btn = document.getElementById('play-pause-button');
 
   if (videoPlayer.paused || videoPlayer.ended) {
-    setButtonType('pause');
+    setButtonType(btn, 'pause');
     videoPlayer.play();
   } else {
-    setButtonType('play');
+    setButtonType(btn, 'play');
     videoPlayer.pause();
   }
 }
 
 function setButtonType(btn, type) {
   btn.title = btn.innerHTML = btn.className = type;
+}
+
+function stop() {
+  videoPlayer.pause();
+  videoPlayer.currentTime = 0;
+  videoPlayer.load();
 }
