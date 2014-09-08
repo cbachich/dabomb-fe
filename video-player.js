@@ -8,18 +8,21 @@ function initVideoPlayer() {
 }
 
 function playPause() {
-  var btn = document.getElementById('play-pause-button');
-
-  if (videoPlayer.paused || videoPlayer.ended) {
-    setButtonType(btn, 'pause');
-    videoPlayer.play();
-  } else {
-    setButtonType(btn, 'play');
-    videoPlayer.pause();
-  }
+  (videoPlayer.paused || videoPlayer.ended) ? play() : pause();
 }
 
-function setButtonType(btn, type) {
+function play() {
+  setButtonType('pause');
+  videoPlayer.play();
+}
+
+function pause() {
+  setButtonType('play');
+  videoPlayer.pause();
+}
+
+function setButtonType(type) {
+  var btn = document.getElementById('play-pause-button');
   btn.title = btn.innerHTML = btn.className = type;
 }
 
