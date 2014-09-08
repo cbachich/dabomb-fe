@@ -32,6 +32,11 @@ function stop() {
   videoPlayer.currentTime = 0;
 }
 
+function replay() {
+  stop();
+  play();
+}
+
 function changeVolume(direction) {
   direction === 'up' ? volumeUp() : volumeDown();
 
