@@ -11,14 +11,14 @@ function togglePlayPause() {
   var btn = document.getElementById('play-pause-button');
 
   if (videoPlayer.paused || videoPlayer.ended) {
-    btn.title = 'pause';
-    btn.innerHTML = 'pause';
-    btn.className = 'pause';
+    setButtonType('pause');
     videoPlayer.play();
   } else {
-    btn.title = 'play';
-    btn.innerHTML = 'play';
-    btn.className = 'play';
+    setButtonType('play');
     videoPlayer.pause();
   }
+}
+
+function setButtonType(btn, type) {
+  btn.title = btn.innerHTML = btn.className = type;
 }
