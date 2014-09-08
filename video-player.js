@@ -26,5 +26,4 @@ function setButtonType(btn, type) {
 function stop() {
   videoPlayer.pause();
   videoPlayer.currentTime = 0;
-  videoPlayer.load();
 }
