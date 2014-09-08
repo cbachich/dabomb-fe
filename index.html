@@ -13,10 +13,11 @@
       </video>
     </div>
     <div id="video-controls">
-      <button id='play-pause-button' class='play' title='play' onclick='playPause();'>play</button>
+      <button id='play-pause-button' class='play' title='play' onclick='togglePlayPause();'>play</button>
       <button id='stop-button' class='stop' title='stop' onclick='stop();'>stop</button>
       <button id='volume-up-button' class='volume-up' title='increase volume' onclick='changeVolume("up")'>louder</button>
       <button id='volume-down-button' class='volume-down' title='decrease volume' onclick='changeVolume("down")'>quieter</button>
+      <button id='mute' class='mute' title='mute' onclick='toggleMute();'>mute</button>
     </div>
   </body>
 </html>

@@ -7,27 +7,28 @@ function initVideoPlayer() {
   videoPlayer.controls = false;
 }
 
-function playPause() {
+function togglePlayPause() {
   (videoPlayer.paused || videoPlayer.ended) ? play() : pause();
 }
 
 function play() {
-  setButtonType('pause');
+  var btn = document.getElementById('play-pause-button');
+  changeButtonType(btn,'pause');
   videoPlayer.play();
 }
 
 function pause() {
-  setButtonType('play');
+  var btn = document.getElementById('play-pause-button');
+  changeButtonType(btn,'play');
   videoPlayer.pause();
 }
 
-function setButtonType(type) {
-  var btn = document.getElementById('play-pause-button');
+function changeButtonType(btn, type) {
   btn.title = btn.innerHTML = btn.className = type;
 }
 
 function stop() {
-  videoPlayer.pause();
+  pause();
   videoPlayer.currentTime = 0;
 }
 
@@ -44,4 +45,20 @@ function volumeUp() {
 
 function volumeDown() {
   videoPlayer.volume -= videoPlayer.volume == 0 ? 0 : 0.1;
+}
+
+function toggleMute() {
+  videoPlayer.muted ? unmute() : mute();
+}
+
+function mute() {
+  var btn = document.getElementById('mute');
+  changeButtonType(btn, 'unmute');
+  videoPlayer.muted = true;
+}
+
+function unmute() {
+  var btn = document.getElementById('mute');
+  changeButtonType(btn, 'mute');
+  videoPlayer.muted = false;
 }
