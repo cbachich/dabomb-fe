@@ -30,3 +30,18 @@ function stop() {
   videoPlayer.pause();
   videoPlayer.currentTime = 0;
 }
+
+function changeVolume(direction) {
+  direction === 'up' ? volumeUp() : volumeDown();
+
+  // Only allow 1 decimal place so that the increment/decrement works
+  videoPlayer.volume = parseFloat(videoPlayer.volume).toFixed(1);
+}
+
+function volumeUp() {
+  videoPlayer.volume += videoPlayer.volume == 1 ? 0 : 0.1;
+}
+
+function volumeDown() {
+  videoPlayer.volume -= videoPlayer.volume == 0 ? 0 : 0.1;
+}
