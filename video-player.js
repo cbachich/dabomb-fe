@@ -23,23 +23,22 @@ function togglePlayPause() {
   (videoPlayer.paused || videoPlayer.ended) ? playVideo() : pauseVideo();
 }
 
-function changePlayPauseButton(type) {
-  var btn = document.getElementById('play-pause-button');
-  changeButtonType(btn,type);
-}
-
 function playVideo() {
-  changePlayPauseButton('pause');
+  var btn = document.getElementById('play-pause-button');
+  btn.title = 'pause';
+  document.getElementById('play-pause-icon').className = 'glyphicon glyphicon-pause';
   videoPlayer.play();
 }
 
 function pauseVideo() {
-  changePlayPauseButton('play');
+  var btn = document.getElementById('play-pause-button');
+  btn.title = 'play';
+  document.getElementById('play-pause-icon').className = 'glyphicon glyphicon-play';
   videoPlayer.pause();
 }
 
 function changeButtonType(btn, type) {
-  btn.title = btn.innerHTML = btn.className = type;
+  btn.title = btn.innerHTML = type;
 }
 
 function stopVideo() {
@@ -74,12 +73,12 @@ function toggleMute() {
 
 function mute() {
   var btn = document.getElementById('mute');
-  changeButtonType(btn, 'unmute');
+  btn.className = "btn btn-primary";
   videoPlayer.muted = true;
 }
 
 function unmute() {
   var btn = document.getElementById('mute');
-  changeButtonType(btn, 'mute');
+  btn.className = "btn btn-default";
   videoPlayer.muted = false;
 }

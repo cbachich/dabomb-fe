@@ -3,26 +3,44 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheech HTML5 Video Player</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link href="video-player.css" rel="stylesheet" />
     <script src="video-player.js"></script>
   </head>
   <body>
-    <div id='video-player'>
+    <div class="container">
+
       <!-- Video -->
-      <video id='video' controls>
-        <source src='http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4' type='video/mp4'>
-      </video>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <video id='video' controls>
+            <source src='http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4' type='video/mp4'>
+          </video>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <progress id='progress-bar' min='0' max='100' value='0'>0% played</progress>
+        </div>
+      </div>
 
       <!-- Video Controls -->
-      <div id="video-controls">
-        <progress id='progress-bar' min='0' max='100' value='0'>0% played</progress>
-        <button id='replay-button' class='replay' title='replay' onclick='replayVideo();'>replay</button>
-        <button id='play-pause-button' class='play' title='play' onclick='togglePlayPause();'>play</button>
-        <button id='stop-button' class='stop' title='stop' onclick='stopVideo();'>stop</button>
-        <button id='volume-up-button' class='volume-up' title='increase volume' onclick='changeVolume("up")'>louder</button>
-        <button id='volume-down-button' class='volume-down' title='decrease volume' onclick='changeVolume("down")'>quieter</button>
-        <button id='mute' class='mute' title='mute' onclick='toggleMute();'>mute</button>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+          <button id='replay-button' class='btn btn-default' title='replay' onclick='replayVideo();'><span class="glyphicon glyphicon-fast-backward"></span></button>
+          <button id='play-pause-button' class='btn btn-default' title='play' onclick='togglePlayPause();'><span id='play-pause-icon' class="glyphicon glyphicon-play"></span></button>
+          <button id='stop-button' class='btn btn-default' title='stop' onclick='stopVideo();'><span class="glyphicon glyphicon-stop"></span></button>
+          <button id='volume-up-button' class='btn btn-default' title='increase volume' onclick='changeVolume("up")'><span class="glyphicon glyphicon-volume-up"></span></button>
+          <button id='volume-down-button' class='btn btn-default' title='decrease volume' onclick='changeVolume("down")'><span class="glyphicon glyphicon-volume-down"></span></button>
+          <button id='mute' class='btn btn-default' title='mute' onclick='toggleMute();'><span class="glyphicon glyphicon-volume-off"></span></button>
+        </div>
       </div>
+
     </div>
   </body>
 </html>
