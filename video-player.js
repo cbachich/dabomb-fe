@@ -1,10 +1,22 @@
 document.addEventListener("DOMContentLoaded", function() { initVideoPlayer(); }, false);
 
-var videoPlayer;
+var videoPlayer,progressBar;;
 
 function initVideoPlayer() {
   videoPlayer = document.getElementById('video');
+  progressBar = document.getElementById('progress-bar');
   videoPlayer.controls = false;
+  videoPlayer.addEventListener('timeupdate', updateProgressBar, false);
+}
+
+function updateProgressBar() {
+  var percentage = pointOnProgressBar(videoPlayer.currentTime);
+  progressBar.value = percentage;
+  progressBar.innerHTML = percentage + '% played';
+}
+
+function pointOnProgressBar(time) {
+  return (100 / videoPlayer.duration) * time;
 }
 
 function togglePlayPause() {
@@ -30,6 +42,7 @@ function changeButtonType(btn, type) {
 function stop() {
   pause();
   videoPlayer.currentTime = 0;
+  progressBar.value = 0;
 }
 
 function replay() {
