@@ -7,16 +7,19 @@ function initVideoPlayer() {
   progressBar = document.getElementById('progress-bar');
   videoPlayer.controls = false;
   videoPlayer.addEventListener('timeupdate', updateProgressBar, false);
+  progressBar.addEventListener('click', clickProgressBar, false);
 }
 
 function updateProgressBar() {
-  var percentage = pointOnProgressBar(videoPlayer.currentTime);
+  var percentage = (100 / videoPlayer.duration) * videoPlayer.currentTime;
   progressBar.value = percentage;
   progressBar.innerHTML = percentage + '% played';
 }
 
-function pointOnProgressBar(time) {
-  return (100 / videoPlayer.duration) * time;
+function clickProgressBar(e) {
+  var position = e.clientX - e.target.offsetLeft;
+  var percent = ((100 / e.target.offsetWidth) * position).toFixed(0);
+  videoPlayer.currentTime = (videoPlayer.duration / 100) * percent;
 }
 
 function togglePlayPause() {
