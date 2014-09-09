@@ -17,7 +17,8 @@ function updateProgressBar() {
 }
 
 function clickProgressBar(e) {
-  var position = e.clientX - e.target.offsetLeft;
+  var progressDiv = document.getElementById('progress-div');
+  var position = e.clientX - progressDiv.offsetLeft - e.target.offsetLeft;
   var percent = ((100 / e.target.offsetWidth) * position).toFixed(0);
   videoPlayer.currentTime = (videoPlayer.duration / 100) * percent;
 }
