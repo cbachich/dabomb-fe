@@ -20,18 +20,21 @@ function pointOnProgressBar(time) {
 }
 
 function togglePlayPause() {
-  (videoPlayer.paused || videoPlayer.ended) ? play() : pause();
+  (videoPlayer.paused || videoPlayer.ended) ? playVideo() : pauseVideo();
 }
 
-function play() {
+function changePlayPauseButton(type) {
   var btn = document.getElementById('play-pause-button');
-  changeButtonType(btn,'pause');
+  changeButtonType(btn,type);
+}
+
+function playVideo() {
+  changePlayPauseButton('pause');
   videoPlayer.play();
 }
 
-function pause() {
-  var btn = document.getElementById('play-pause-button');
-  changeButtonType(btn,'play');
+function pauseVideo() {
+  changePlayPauseButton('play');
   videoPlayer.pause();
 }
 
@@ -39,15 +42,15 @@ function changeButtonType(btn, type) {
   btn.title = btn.innerHTML = btn.className = type;
 }
 
-function stop() {
-  pause();
+function stopVideo() {
+  pauseVideo();
   videoPlayer.currentTime = 0;
   progressBar.value = 0;
 }
 
-function replay() {
-  stop();
-  play();
+function replayVideo() {
+  stopVideo();
+  playVideo();
 }
 
 function changeVolume(direction) {
