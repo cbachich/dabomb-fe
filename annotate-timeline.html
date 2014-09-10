@@ -4,10 +4,10 @@
   </div>
   <div class="col-xs-8">
     <div class="progress-row">
-      <input type="range" name="points" min="0" max="100" value="{{annotation.start}}">
+      <input type="range" name="points" min="0" max="100" ng-model="annotation.start">
     </div>
     <div>
-      Text: <input type="text" class="input-box text-box" value="{{annotation.text}}"> Length (sec): <input type="number" class="input-box length-box" value="{{annotation.length}}">
+      Text: <input type="text" class="input-box text-box" ng-model="annotation.text"> Length (sec): <input type="number" class="input-box length-box" ng-model="annotation.lapse">
     </div>
   </div>
 </div>

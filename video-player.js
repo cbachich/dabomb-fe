@@ -4,25 +4,44 @@
   .controller('VideoController', function() {
     var video = this;
 
-    var videoPlayer,progressBar;;
+    var videoPlayer,progressBar,headline;
     videoPlayer = document.getElementById('video');
     progressBar = document.getElementById('progress-bar');
+    headline = document.getElementById('headline');
     videoPlayer.controls = false;
-    videoPlayer.addEventListener('timeupdate', updateProgressBar, false);
+    videoPlayer.addEventListener('timeupdate', update, false);
     progressBar.addEventListener('click', clickProgressBar, false);
 
     video.annotations = [
-      { start: 10, length: 20, text: "Testing" },
-      { start: 50, length: 40, text: "New Test" }
+      { start: 10, lapse: 20, text: "Testing" },
+      { start: 50, lapse: 40, text: "New Test" }
     ];
 
     video.addAnnotation = function () {
-      video.annotations.push({ start: 0, length: 10, text: "New One" });
+      video.annotations.push({ start: 0, lapse: 10, text: "New One" });
     };
 
     video.deleteAnnotation = function (annotateId) {
       video.annotations.splice(annotateId, 1);
     };
+
+    function update() {
+      updateHeadline();
+      updateProgressBar();
+    }
+
+    function updateHeadline() {
+      for (i = 0; i < video.annotations.length; i++) {
+        var annotation = video.annotations[i];
+        var startTime = (videoPlayer.duration / 100) * annotation.start;
+        var endTime = parseInt(startTime) + parseInt(annotation.lapse);
+        if ( (startTime <= videoPlayer.currentTime) && (endTime >= videoPlayer.currentTime) ) {
+          headline.innerHTML = annotation.text;
+          return;
+        }
+      }
+      headline.innerHTML = "";
+    }
 
     function updateProgressBar () {
       var percentage = (100 / videoPlayer.duration) * videoPlayer.currentTime;

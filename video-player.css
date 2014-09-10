@@ -20,6 +20,15 @@ progress {
   padding-bottom: 5px;
 }
 
+.headline-row {
+  padding: 10px 0;
+  height: 40px;
+}
+
+.headline-row input {
+  width: 100%;
+}
+
 .annotate-row {
   padding-bottom: 10px;
 }
