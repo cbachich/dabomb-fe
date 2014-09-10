@@ -26,13 +26,12 @@
       <!-- Video Controls -->
       <div class="row">
         <div class="col-md-10 col-md-offset-1 text-center">
-          <button id='replay-button' class='btn btn-default' title='replay' onclick='replayVideo();'><span class="glyphicon glyphicon-fast-backward"></span></button>
-          <button id='play-pause-button' class='btn btn-default' title='play' onclick='togglePlayPause();'><span id='play-pause-icon' class="glyphicon glyphicon-play"></span></button>
-          <button id='stop-button' class='btn btn-default' title='stop' onclick='stopVideo();'><span class="glyphicon glyphicon-stop"></span></button>
-          <button id='volume-up-button' class='btn btn-default' title='increase volume' onclick='changeVolume("up")'><span class="glyphicon glyphicon-volume-up"></span></button>
-          <button id='volume-down-button' class='btn btn-default' title='decrease volume' onclick='changeVolume("down")'><span class="glyphicon glyphicon-volume-down"></span></button>
-          <button id='mute' class='btn btn-default' title='mute' onclick='toggleMute();'><span class="glyphicon glyphicon-volume-off"></span></button>
-          <button class='btn btn-default' title='add annotation' ng-click="videoCtrl.addAnnotation()"><span class='glyphicon glyphicon-plus'></span> Add annotation</button>
+          <button id='replay-button' class='btn btn-default' title='replay' ng-click='videoCtrl.replayVideo()'><span class="glyphicon glyphicon-fast-backward"></span></button>
+          <button id='play-pause-button' class='btn btn-default' title='play' ng-click='videoCtrl.togglePlayPause()'><span id='play-pause-icon' class="glyphicon glyphicon-play"></span></button>
+          <button id='stop-button' class='btn btn-default' title='stop' ng-click='videoCtrl.stopVideo()'><span class="glyphicon glyphicon-stop"></span></button>
+          <button id='volume-up-button' class='btn btn-default' title='increase volume' ng-click='videoCtrl.changeVolume("up")'><span class="glyphicon glyphicon-volume-up"></span></button>
+          <button id='volume-down-button' class='btn btn-default' title='decrease volume' ng-click='videoCtrl.changeVolume("down")'><span class="glyphicon glyphicon-volume-down"></span></button>
+          <button id='mute' class='btn btn-default' title='mute' ng-click='videoCtrl.toggleMute()'><span class="glyphicon glyphicon-volume-off"></span></button>
         </div>
       </div>
 
@@ -46,6 +45,10 @@
       <!-- Annotations -->
       <annotate-timeline ng-repeat="annotation in videoCtrl.annotations"></annotate-timeline>
 
+      <!-- Add Annotation -->
+      <div class="row text-center">
+        <button class='btn btn-default' title='add annotation' ng-click="videoCtrl.addAnnotation()"><span class='glyphicon glyphicon-plus'></span> Add annotation</button>
+      </div>
     </div>
   </body>
 </html>
