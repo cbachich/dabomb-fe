@@ -3,5 +3,45 @@ video {
 }
 
 progress {
+  margin-top: 5px;
   width: 100%;
+}
+
+.btn-bar {
+  height: 80%;
+}
+
+.pull-right {
+  position: absolute;
+  right: 0;
+}
+
+.progress-row {
+  padding-bottom: 5px;
+}
+
+.annotate-row {
+  padding-bottom: 10px;
+}
+
+.input-box {
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.text-box {
+  width: 50%;
+}
+
+.length-box {
+  width: 20%;
+  text-align: center;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='en' ng-app="player">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheech HTML5 Video Player</title>
@@ -7,10 +7,11 @@
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.1/angular.min.js"></script>
     <link href="video-player.css" rel="stylesheet" />
     <script src="video-player.js"></script>
   </head>
-  <body>
+  <body ng-controller="VideoController as videoCtrl">
     <div class="container">
 
       <!-- Video -->
@@ -19,13 +20,6 @@
           <video id='video' controls>
             <source src='http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4' type='video/mp4'>
           </video>
-        </div>
-      </div>
-
-      <!-- Progress Bar -->
-      <div class="row">
-        <div id='progress-div' class="col-md-10 col-md-offset-1">
-          <progress id='progress-bar' min='0' max='100' value='0'>0% played</progress>
         </div>
       </div>
 
@@ -38,8 +32,19 @@
           <button id='volume-up-button' class='btn btn-default' title='increase volume' onclick='changeVolume("up")'><span class="glyphicon glyphicon-volume-up"></span></button>
           <button id='volume-down-button' class='btn btn-default' title='decrease volume' onclick='changeVolume("down")'><span class="glyphicon glyphicon-volume-down"></span></button>
           <button id='mute' class='btn btn-default' title='mute' onclick='toggleMute();'><span class="glyphicon glyphicon-volume-off"></span></button>
+          <button class='btn btn-default' title='add annotation' ng-click="videoCtrl.addAnnotation()"><span class='glyphicon glyphicon-plus'></span> Add annotation</button>
         </div>
       </div>
+
+      <!-- Progress Bar -->
+      <div class="row">
+        <div id='progress-div' class="col-xs-8 col-xs-offset-2">
+          <progress id='progress-bar' min='0' max='100' value='0'>0% played</progress>
+        </div>
+      </div>
+
+      <!-- Annotations -->
+      <annotate-timeline ng-repeat="annotation in videoCtrl.annotations"></annotate-timeline>
 
     </div>
   </body>

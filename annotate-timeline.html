@@ -1,0 +1,13 @@
+<div class="row annotate-row">
+  <div class="col-xs-1 col-xs-offset-1">
+    <button class="btn btn-default btn-lg pull-right" ng-click="videoCtrl.deleteAnnotation($index)"><span class="glyphicon glyphicon-trash"></span></button>
+  </div>
+  <div class="col-xs-8">
+    <div class="progress-row">
+      <input type="range" name="points" min="0" max="100" value="{{annotation.start}}">
+    </div>
+    <div>
+      Text: <input type="text" class="input-box text-box" value="{{annotation.text}}"> Length (sec): <input type="number" class="input-box length-box" value="{{annotation.length}}">
+    </div>
+  </div>
+</div>

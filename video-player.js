@@ -86,3 +86,32 @@ function unmute() {
   btn.className = "btn btn-default";
   videoPlayer.muted = false;
 }
+
+(function() {
+  angular.module('player', [])
+
+  .controller('VideoController', function() {
+    var video = this;
+
+    video.annotations = [
+      { start: 10, length: 20, text: "Testing" },
+      { start: 50, length: 40, text: "New Test" }
+    ];
+
+    this.addAnnotation = function () {
+      video.annotations.push({ start: 0, length: 10, text: "New One" });
+    };
+
+    this.deleteAnnotation = function (annotateId) {
+      video.annotations.splice(annotateId, 1);
+    };
+
+  })
+
+  .directive('annotateTimeline', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'annotate-timeline.html'
+    };
+  });
+})();
