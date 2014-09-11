@@ -17,19 +17,15 @@
   <body ng-controller="VideoController as videoCtrl">
     <div class="container">
 
-      <!-- Messages -->
-      <div class="row headline-row">
-        <div id="headline" class="col-md-10 col-md-offset-1 text-center">
-          {{videoCtrl.headline}}
-        </div>
-      </div>
-
       <!-- Video -->
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <video id='video' controls>
             <source src='http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4' type='video/mp4'>
           </video>
+          <div id="headline" style="none">
+            {{videoCtrl.headline}}
+          </div>
         </div>
       </div>
 
@@ -47,7 +43,7 @@
 
       <!-- Progress Bar -->
       <div class="row">
-        <div id='progress-div' class="col-xs-10 col-xs-offset-2">
+        <div id='progress-div' class="col-xs-10 col-xs-offset-1">
           <progress id='progress-bar' min='0' max='100' value='0'>0% played</progress>
         </div>
       </div>

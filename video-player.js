@@ -12,13 +12,10 @@
     videoPlayer.addEventListener('timeupdate', update, false);
     progressBar.addEventListener('click', clickProgressBar, false);
 
-    video.annotations = [
-      { start: 10, lapse: 20, text: "Testing", active: true },
-      { start: 50, lapse: 90, text: "New Test", active: false }
-    ];
+    video.annotations = [];
 
     video.addAnnotation = function () {
-      video.annotations.push({ start: 0, lapse: 10, text: "New One", active: true });
+      video.annotations.push({ start: 0, end: 10, text: "New One", active: true });
     };
 
     video.deleteAnnotation = function (annotateId) {
@@ -35,17 +32,20 @@
     }
 
     function updateHeadline() {
+      var showHeadline = false;
+      var annotations = [];
       for (i = 0; i < video.annotations.length; i++) {
         var annotation = video.annotations[i];
         var step = videoPlayer.duration / 100;
         var startTime = step * annotation.start;
-        var endTime = step * annotation.lapse;
+        var endTime = step * annotation.end;
         if ( (startTime <= videoPlayer.currentTime) && (endTime >= videoPlayer.currentTime) ) {
-          headline.innerHTML = annotation.text;
-          return;
+          annotations.push(annotation.text);
+          showHeadline = true;
         }
       }
-      headline.innerHTML = "";
+      headline.innerHTML = annotations.join(", ");
+      headline.style.display = showHeadline ? "block" : "none";
     }
 
     function updateProgressBar () {

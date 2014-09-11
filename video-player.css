@@ -1,5 +1,19 @@
 video {
   width: 100%;
+  padding-top: 10px;
+}
+
+#headline {
+  position: absolute;
+  top: 20px;
+  color: #CC46E8;
+  text-align: center;
+  font-size: 24px;
+  background-color: rgba(221, 221, 221, 0.7);
+  left: 15px;
+  right: 15px;
+  padding: 5px 0;
+  z-index: 2147483647;
 }
 
 progress {
@@ -13,15 +27,6 @@ progress {
 
 .progress-row {
   padding-bottom: 15px;
-}
-
-.headline-row {
-  padding: 10px 0;
-  height: 40px;
-}
-
-.headline-row input {
-  width: 100%;
 }
 
 .annotate-row {
