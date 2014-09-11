@@ -15,7 +15,7 @@
     video.annotations = [];
 
     video.addAnnotation = function () {
-      video.annotations.push({ start: currentPercent(), end: currentPercent()+10, text: "New One", active: true });
+      video.annotations.push({ start: currentPercent(), end: currentPercent()+10, text: "Enter annotation here...", active: true });
     };
 
     video.deleteAnnotation = function (annotateId) {
