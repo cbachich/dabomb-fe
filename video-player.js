@@ -1,5 +1,5 @@
 (function() {
-  angular.module('player', [])
+  angular.module('player', ['nouislider'])
 
   .controller('VideoController', function() {
     var video = this;
@@ -13,17 +13,21 @@
     progressBar.addEventListener('click', clickProgressBar, false);
 
     video.annotations = [
-      { start: 10, lapse: 20, text: "Testing" },
-      { start: 50, lapse: 40, text: "New Test" }
+      { start: 10, lapse: 20, text: "Testing", active: true },
+      { start: 50, lapse: 90, text: "New Test", active: false }
     ];
 
     video.addAnnotation = function () {
-      video.annotations.push({ start: 0, lapse: 10, text: "New One" });
+      video.annotations.push({ start: 0, lapse: 10, text: "New One", active: true });
     };
 
     video.deleteAnnotation = function (annotateId) {
       video.annotations.splice(annotateId, 1);
     };
+
+    video.toggleAnnotationDisplay = function (annotateId) {
+      video.annotations[annotateId].active = !video.annotations[annotateId].active;
+    }
 
     function update() {
       updateHeadline();
@@ -33,8 +37,9 @@
     function updateHeadline() {
       for (i = 0; i < video.annotations.length; i++) {
         var annotation = video.annotations[i];
-        var startTime = (videoPlayer.duration / 100) * annotation.start;
-        var endTime = parseInt(startTime) + parseInt(annotation.lapse);
+        var step = videoPlayer.duration / 100;
+        var startTime = step * annotation.start;
+        var endTime = step * annotation.lapse;
         if ( (startTime <= videoPlayer.currentTime) && (endTime >= videoPlayer.currentTime) ) {
           headline.innerHTML = annotation.text;
           return;
