@@ -15,7 +15,7 @@
     video.annotations = [];
 
     video.addAnnotation = function () {
-      video.annotations.push({ start: 0, end: 10, text: "New One", active: true });
+      video.annotations.push({ start: currentPercent(), end: currentPercent()+10, text: "New One", active: true });
     };
 
     video.deleteAnnotation = function (annotateId) {
@@ -49,9 +49,13 @@
     }
 
     function updateProgressBar () {
-      var percentage = (100 / videoPlayer.duration) * videoPlayer.currentTime;
+      var percentage = currentPercent();
       progressBar.value = percentage;
       progressBar.innerHTML = percentage + '% played';
+    }
+
+    function currentPercent() {
+      return (100 / videoPlayer.duration) * videoPlayer.currentTime;
     }
 
     function clickProgressBar (e) {
