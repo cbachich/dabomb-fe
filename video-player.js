@@ -12,8 +12,14 @@
     videoPlayer.addEventListener('timeupdate', update, false);
     progressBar.addEventListener('click', clickProgressBar, false);
 
-    video.annotations = [];
-    video.annotationCurrentId = 1;
+    video.annotations = [
+      { id: 1, start: 1, end: 7, text: "A custom video player with annotations", active: false, display: false, top: "40%", left: "35%" },
+      { id: 2, start: 10, end: 25, text: "Click the pencil icon to edit the annotation text", active: false, display: false, top: "10%", left: "35%" },
+      { id: 3, start: 10, end: 25, text: "Click the trash button to remove an annotation", active: false, display: false, top: "40%", left: "35%" },
+      { id: 4, start: 10, end: 25, text: "Click the 'Add annotation' button to add more annotations", active: false, display: false, top: "70%", left: "35%" },
+      { id: 5, start: 28, end: 34, text: "Feel free to drag the annotations wherever you like on the video", active: false, display: false, top: "40%", left: "35%" }
+    ];
+    video.annotationCurrentId = 6;
 
     video.addAnnotation = function () {
       video.annotations.push({ id: video.annotationCurrentId++, start: currentPercent(), end: currentPercent()+10, text: "Enter annotation here...", active: true, display: false });

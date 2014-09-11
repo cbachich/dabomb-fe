@@ -4,13 +4,14 @@ video {
 
 .headline {
   position: absolute;
-  width: 200px;
+  width: 250px;
   top: 20px;
+  left: 20px;
   color: #CC46E8;
   text-align: center;
   font-size: 18px;
   background-color: rgba(221, 221, 221, 0.7);
-  padding: 5px 0;
+  padding: 10px;
   cursor: pointer;
 }
 
