@@ -13,9 +13,10 @@
     progressBar.addEventListener('click', clickProgressBar, false);
 
     video.annotations = [];
+    video.annotationCurrentId = 1;
 
     video.addAnnotation = function () {
-      video.annotations.push({ start: currentPercent(), end: currentPercent()+10, text: "Enter annotation here...", active: true });
+      video.annotations.push({ id: video.annotationCurrentId++, start: currentPercent(), end: currentPercent()+10, text: "Enter annotation here...", active: true, display: false });
     };
 
     video.deleteAnnotation = function (annotateId) {
@@ -32,20 +33,14 @@
     }
 
     function updateHeadline() {
-      var showHeadline = false;
       var annotations = [];
       for (i = 0; i < video.annotations.length; i++) {
         var annotation = video.annotations[i];
         var step = videoPlayer.duration / 100;
         var startTime = step * annotation.start;
         var endTime = step * annotation.end;
-        if ( (startTime <= videoPlayer.currentTime) && (endTime >= videoPlayer.currentTime) ) {
-          annotations.push(annotation.text);
-          showHeadline = true;
-        }
+        document.getElementById("headline-" + video.annotations[i].id).style.display = (startTime <= videoPlayer.currentTime) && (endTime >= videoPlayer.currentTime) ? 'block' : 'none';
       }
-      headline.innerHTML = annotations.join(", ");
-      headline.style.display = showHeadline ? "block" : "none";
     }
 
     function updateProgressBar () {
@@ -135,6 +130,15 @@
     return {
       restrict: 'E',
       templateUrl: 'annotate-timeline.html'
+    };
+  })
+
+  .directive('myDraggable', function() {
+    return {
+      restrict: 'A',
+      link: function(scope, elem, attr, ctrl) {
+        elem.draggable({containment: "#video-container"});
+      }
     };
   });
 })();

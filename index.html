@@ -4,7 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheech HTML5 Video Player</title>
     <link rel="stylesheet" href="bower_components/nouislider/jquery.nouislider.css" />
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <link href="bower_components/jquery-ui/themes/base/base.css" rel="stylesheet" />
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/nouislider/jquery.nouislider.js"></script>
     <script src="bower_components/nouislider/Link.js"></script>
@@ -19,12 +21,14 @@
 
       <!-- Video -->
       <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div id="video-container" class="col-md-10 col-md-offset-1">
           <video id='video' controls>
             <source src='http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4' type='video/mp4'>
           </video>
-          <div id="headline" style="display: none">
-            {{videoCtrl.headline}}
+          <div ng-repeat="annotate in videoCtrl.annotations">
+            <div id="headline-{{annotate.id}}" class="headline" my-draggable>
+              {{annotate.text}}
+            </div>
           </div>
         </div>
       </div>
