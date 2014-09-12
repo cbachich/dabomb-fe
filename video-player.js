@@ -38,17 +38,22 @@
             'Content-Type': 'application/json'
           }
         }
-      ).success(function(data) {
-        video.annotations.push(data);
+      ).success(function(annotation) {
+        video.annotations.push(annotation);
       });
     };
 
-    video.deleteAnnotation = function (annotateId) {
-      video.annotations.splice(annotateId, 1);
+    video.deleteAnnotation = function (index) {
+      $http.delete(
+          'http://localhost:3000/annotations/' + video.annotations[index].id
+      ).success(function(data) {
+        console.log(data);
+        video.annotations.splice(index, 1);
+      });
     };
 
-    video.toggleAnnotationDisplay = function (annotateId) {
-      video.annotations[annotateId].active = !video.annotations[annotateId].active;
+    video.toggleAnnotationDisplay = function (index) {
+      video.annotations[index].active = !video.annotations[index].active;
     }
 
     function update() {
