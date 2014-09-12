@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="bower_components/nouislider/jquery.nouislider.css" />
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-    <link href="bower_components/jquery-ui/themes/base/base.css" rel="stylesheet" />
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/nouislider/jquery.nouislider.js"></script>
     <script src="bower_components/nouislider/Link.js"></script>
     <script src="bower_components/angular-nouislider/src/nouislider.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link href="video-player.css" rel="stylesheet" />
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="video-player.js"></script>
+    <link href="bower_components/jquery-ui/themes/base/base.css" rel="stylesheet" />
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="video-player.css" rel="stylesheet" />
   </head>
   <body ng-controller="VideoController as videoCtrl">
     <div class="container">
@@ -27,7 +27,7 @@
           </video>
           <div ng-repeat="annotate in videoCtrl.annotations">
             <div id="headline-{{annotate.id}}" class="headline" my-draggable style="top: {{annotate.top}}; left: {{annotate.left}}">
-              {{annotate.text}}
+              <span style="color: {{annotate.color}}">{{annotate.text}}</span>
             </div>
           </div>
         </div>

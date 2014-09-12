@@ -13,11 +13,11 @@
     progressBar.addEventListener('click', clickProgressBar, false);
 
     video.annotations = [
-      { id: 1, start: 1, end: 7, text: "A custom video player with annotations", active: false, display: false, top: "40%", left: "35%" },
-      { id: 2, start: 10, end: 25, text: "Click the pencil icon to edit the annotation text", active: false, display: false, top: "10%", left: "35%" },
-      { id: 3, start: 10, end: 25, text: "Click the trash button to remove an annotation", active: false, display: false, top: "40%", left: "35%" },
-      { id: 4, start: 10, end: 25, text: "Click the 'Add annotation' button to add more annotations", active: false, display: false, top: "70%", left: "35%" },
-      { id: 5, start: 28, end: 34, text: "Feel free to drag the annotations wherever you like on the video", active: false, display: false, top: "40%", left: "35%" }
+      { id: 1, start: 1, end: 7, text: "A custom video player with annotations", active: false, display: false, top: "40%", left: "35%", color: '#CC46EB' },
+      { id: 2, start: 10, end: 25, text: "Click the pencil icon to edit the annotation text", active: false, display: false, top: "10%", left: "35%", color: '#10B5FF' },
+      { id: 3, start: 10, end: 25, text: "Click the trash button to remove an annotation", active: false, display: false, top: "40%", left: "35%", color: '#670CE8' },
+      { id: 4, start: 10, end: 25, text: "Click the 'Add annotation' button to add more annotations", active: false, display: false, top: "70%", left: "35%", color: '#E88F0C' },
+      { id: 5, start: 28, end: 34, text: "Feel free to drag the annotations wherever you like on the video", active: false, display: false, top: "40%", left: "35%", color: '#0B7A34' }
     ];
     video.annotationCurrentId = 6;
 
