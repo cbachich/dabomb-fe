@@ -26,7 +26,7 @@
             <source src='http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4' type='video/mp4'>
           </video>
           <div ng-repeat="annotate in videoCtrl.annotations">
-            <div id="headline-{{annotate.id}}" class="headline" my-draggable style="top: {{annotate.top}}; left: {{annotate.left}}">
+            <div id="headline-{{annotate.id}}" class="headline" my-draggable style="top: {{annotate.top_align}}; left: {{annotate.left_align}}">
               <span style="color: {{annotate.color}}">{{annotate.text}}</span>
             </div>
           </div>

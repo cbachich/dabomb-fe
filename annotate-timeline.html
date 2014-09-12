@@ -3,7 +3,7 @@
     <button class="btn btn-default btn-xs" ng-click="videoCtrl.deleteAnnotation($index)"><span class="glyphicon glyphicon-trash"></span></button>
   </div>
   <div class="col-xs-10">
-    <div slider ng-from="annotation.start" ng-to="annotation.end" behaviour="drag" start=0 end=100 step=1></div>
+    <div slider ng-from="annotation.start_video" ng-to="annotation.end_video" behaviour="drag" start=0 end=100 step=1></div>
   </div>
   <div class="col-xs-1">
     <button class="btn btn-default btn-xs" ng-click="videoCtrl.toggleAnnotationDisplay($index)"><span class="glyphicon glyphicon-pencil"></span></button>

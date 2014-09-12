@@ -1,7 +1,12 @@
 (function() {
   angular.module('player', ['nouislider'])
 
-  .controller('VideoController', function() {
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  }])
+
+  .controller('VideoController', [ '$http', function($http) {
     var video = this;
 
     var videoPlayer,progressBar,headline;
@@ -12,17 +17,30 @@
     videoPlayer.addEventListener('timeupdate', update, false);
     progressBar.addEventListener('click', clickProgressBar, false);
 
-    video.annotations = [
-      { id: 1, start: 1, end: 7, text: "A custom video player with annotations", active: false, display: false, top: "40%", left: "35%", color: '#CC46EB' },
-      { id: 2, start: 10, end: 25, text: "Click the pencil icon to edit the annotation text", active: false, display: false, top: "10%", left: "35%", color: '#10B5FF' },
-      { id: 3, start: 10, end: 25, text: "Click the trash button to remove an annotation", active: false, display: false, top: "40%", left: "35%", color: '#670CE8' },
-      { id: 4, start: 10, end: 25, text: "Click the 'Add annotation' button to add more annotations", active: false, display: false, top: "70%", left: "35%", color: '#E88F0C' },
-      { id: 5, start: 28, end: 34, text: "Feel free to drag the annotations wherever you like on the video", active: false, display: false, top: "40%", left: "35%", color: '#0B7A34' }
-    ];
-    video.annotationCurrentId = 6;
+    video.annotations = [];
+    $http.get('http://localhost:3000/annotations').success(function(data) {
+      video.annotations = data;
+    });
 
     video.addAnnotation = function () {
-      video.annotations.push({ id: video.annotationCurrentId++, start: currentPercent(), end: currentPercent()+10, text: "Enter annotation here...", active: true, display: false });
+      $http.post(
+        'http://localhost:3000/annotations',
+        {
+          annotation:
+          {
+            start_video: currentPercent(),
+            end_video: currentPercent()+10
+          }
+        },
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      ).success(function(data) {
+        video.annotations.push(data);
+      });
     };
 
     video.deleteAnnotation = function (annotateId) {
@@ -43,8 +61,8 @@
       for (i = 0; i < video.annotations.length; i++) {
         var annotation = video.annotations[i];
         var step = videoPlayer.duration / 100;
-        var startTime = step * annotation.start;
-        var endTime = step * annotation.end;
+        var startTime = step * annotation.start_video;
+        var endTime = step * annotation.end_video;
         document.getElementById("headline-" + video.annotations[i].id).style.display = (startTime <= videoPlayer.currentTime) && (endTime >= videoPlayer.currentTime) ? 'block' : 'none';
       }
     }
@@ -130,7 +148,7 @@
       videoPlayer.muted = false;
     }
 
-  })
+  }])
 
   .directive('annotateTimeline', function() {
     return {
