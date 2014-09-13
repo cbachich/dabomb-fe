@@ -20,9 +20,11 @@
     video.saveButtonActive = false;
 
     video.annotations = [];
+    video.deletedAnnotations = [];
 
     video.refreshAnnotations = function() {
       video.annotations = [];
+      video.deletedAnnotations = [];
       $http.get('http://localhost:3000/annotations').success(function(data) {
         video.annotations = data;
         updateSaveButton();
@@ -39,19 +41,27 @@
     }
 
     video.deleteAnnotation = function (index) {
-      $http.delete(
-          'http://localhost:3000/annotations/' + video.annotations[index].id
-      ).success(function(data) {
-        video.annotations.splice(index, 1);
-      });
-    };
+      video.deletedAnnotations.push(video.annotations[index].id);
+      video.annotations.splice(index, 1);
+    }
 
     video.toggleAnnotationDisplay = function (index) {
       video.annotations[index].active = !video.annotations[index].active;
     }
 
     video.saveToServer = function() {
-      if (video.annotations.length > 0) updateServerAnnotation(0);
+      updateServerAnnotation(0);
+      deleteServerAnnotations(0);
+    }
+
+    function deleteServerAnnotations(index) {
+      if (index >= video.deletedAnnotations.length) return;
+
+      $http.delete(
+          'http://localhost:3000/annotations/' + video.deletedAnnotations[index]
+      ).success(function(data) {
+        deleteServerAnnotations(index+1);
+      });
     }
 
     function updateServerAnnotation(index) {
