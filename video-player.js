@@ -17,37 +17,31 @@
     videoPlayer.addEventListener('timeupdate', update, false);
     progressBar.addEventListener('click', clickProgressBar, false);
 
-    video.annotations = [];
-    $http.get('http://localhost:3000/annotations').success(function(data) {
-      video.annotations = data;
-    });
+    video.saveButtonActive = false;
 
-    video.addAnnotation = function () {
-      $http.post(
-        'http://localhost:3000/annotations',
-        {
-          annotation:
-          {
-            start_video: currentPercent(),
-            end_video: currentPercent()+10
-          }
-        },
-        {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        }
-      ).success(function(annotation) {
-        video.annotations.push(annotation);
+    video.annotations = [];
+
+    video.refreshAnnotations = function() {
+      video.annotations = [];
+      $http.get('http://localhost:3000/annotations').success(function(data) {
+        video.annotations = data;
+        updateSaveButton();
       });
-    };
+    }
+
+    function updateSaveButton() {
+      video.saveButtonActive = (video.annotations.length > 0);
+    }
+
+    video.tempId = 1;
+    video.addAnnotation = function () {
+      video.annotations.push({ id: "temp" + video.tempId++, start_video: currentPercent(), end_video: currentPercent()+10, text: "Enter annotation here...", active: true, display: false, color: '#CC46EB', left_align: "35%", top_align: "40%", newToDB: true });
+    }
 
     video.deleteAnnotation = function (index) {
       $http.delete(
           'http://localhost:3000/annotations/' + video.annotations[index].id
       ).success(function(data) {
-        console.log(data);
         video.annotations.splice(index, 1);
       });
     };
@@ -62,21 +56,46 @@
 
     function updateServerAnnotation(index) {
       if (index >= video.annotations.length) return;
+      video.annotations[index].newToDB ? saveNewAnnotation(index) : saveUpdatedAnnotation(index);
+    }
 
+    function savableAttributes(index) {
+      var annotation = video.annotations[index];
       var headlineDiv = $('#headline-' + video.annotations[index].id);
-      $http.put(
-        'http://localhost:3000/annotations/' + video.annotations[index].id,
-        {
+      var attributes = {
           annotation:
           {
-            start_video: video.annotations[index].start_video,
-            end_video: video.annotations[index].end_video,
-            text: video.annotations[index].text,
+            start_video: annotation.start_video,
+            end_video: annotation.end_video,
+            text: annotation.text,
             top_align: headlineDiv.css("top"),
             left_align: headlineDiv.css("left"),
-            color: video.annotations[index].color
+            color: annotation.color
           }
-        },
+        };
+      return attributes;
+    }
+
+    function saveNewAnnotation(index) {
+      $http.post(
+        'http://localhost:3000/annotations',
+        savableAttributes(index),
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      ).success(function(annotation) {
+        updateServerAnnotation(index+1);
+      });
+    };
+
+
+    function saveUpdatedAnnotation(index) {
+      $http.put(
+        'http://localhost:3000/annotations/' + video.annotations[index].id,
+        savableAttributes(index),
         {
           headers: {
             'Accept': 'application/json',

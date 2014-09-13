@@ -26,7 +26,7 @@
             <source src='http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4' type='video/mp4'>
           </video>
           <div ng-repeat="annotate in videoCtrl.annotations">
-            <div id="headline-{{annotate.id}}" class="headline" my-draggable style="top: {{annotate.top_align}}; left: {{annotate.left_align}}">
+            <div id="headline-{{annotate.id}}" class="headline" my-draggable style="top: {{annotate.top_align}}; left: {{annotate.left_align}}; display: none;">
               <span style="color: {{annotate.color}}">{{annotate.text}}</span>
             </div>
           </div>
@@ -57,8 +57,9 @@
 
       <!-- Add Annotation -->
       <div class="row text-center add-annotation-row">
+        <button class='btn btn-default' title='refresh annotations' ng-click="videoCtrl.refreshAnnotations()"><span class='glyphicon glyphicon-refresh'></span> Sync from Server</button>
         <button class='btn btn-default' title='add annotation' ng-click="videoCtrl.addAnnotation()"><span class='glyphicon glyphicon-plus'></span> Add Annotation</button>
-        <button class='btn btn-default' title='save annotations' ng-click="videoCtrl.saveToServer()"><span class='glyphicon glyphicon-cloud-upload'></span> Save to Server</button>
+        <button class='btn btn-default' title='save annotations' ng-click="videoCtrl.saveToServer()" ng-show="videoCtrl.saveButtonActive"><span class='glyphicon glyphicon-cloud-upload'></span> Save to Server</button>
       </div>
     </div>
   </body>
