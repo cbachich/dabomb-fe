@@ -9,6 +9,9 @@
   .controller('VideoController', [ '$http', function($http) {
     var video = this;
 
+    video.videoSrc = 'http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4';
+    var provider = "http://cheechcode.com/dabomb-api";
+
     var videoPlayer,progressBar,headline;
     videoPlayer = document.getElementById('video');
     progressBar = document.getElementById('progress-bar');
@@ -25,7 +28,7 @@
     video.refreshAnnotations = function() {
       video.annotations = [];
       video.deletedAnnotations = [];
-      $http.get('http://cheechcode.com/dabomb-api/annotations').success(function(data) {
+      $http.get(provider + '/annotations').success(function(data) {
         video.annotations = data;
         updateSaveButton();
       });
@@ -58,7 +61,7 @@
       if (index >= video.deletedAnnotations.length) return;
 
       $http.delete(
-          'http://cheechcode.com/dabomb-api/annotations/' + video.deletedAnnotations[index]
+          provider + '/annotations/' + video.deletedAnnotations[index]
       ).success(function(data) {
         deleteServerAnnotations(index+1);
       });
@@ -88,7 +91,7 @@
 
     function saveNewAnnotation(index) {
       $http.post(
-        'http://cheechcode.com/dabomb-api/annotations',
+        provider + '/annotations',
         savableAttributes(index),
         {
           headers: {
@@ -104,7 +107,7 @@
 
     function saveUpdatedAnnotation(index) {
       $http.put(
-        'http://cheechcode.com/dabomb-api/annotations/' + video.annotations[index].id,
+        provider + '/annotations/' + video.annotations[index].id,
         savableAttributes(index),
         {
           headers: {
@@ -227,7 +230,9 @@
     return {
       restrict: 'A',
       link: function(scope, elem, attr, ctrl) {
-        elem.draggable({containment: "#video-container"});
+        elem.draggable({
+          containment: ".video-container"
+        });
       }
     };
   });
