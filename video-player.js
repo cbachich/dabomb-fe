@@ -56,6 +56,38 @@
       video.annotations[index].active = !video.annotations[index].active;
     }
 
+    video.saveToServer = function() {
+      if (video.annotations.length > 0) updateServerAnnotation(0);
+    }
+
+    function updateServerAnnotation(index) {
+      if (index >= video.annotations.length) return;
+
+      var headlineDiv = $('#headline-' + video.annotations[index].id);
+      $http.put(
+        'http://localhost:3000/annotations/' + video.annotations[index].id,
+        {
+          annotation:
+          {
+            start_video: video.annotations[index].start_video,
+            end_video: video.annotations[index].end_video,
+            text: video.annotations[index].text,
+            top_align: headlineDiv.css("top"),
+            left_align: headlineDiv.css("left"),
+            color: video.annotations[index].color
+          }
+        },
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      ).success(function(annotation) {
+        updateServerAnnotation(index+1);
+      });
+    }
+
     function update() {
       updateHeadline();
       updateProgressBar();
