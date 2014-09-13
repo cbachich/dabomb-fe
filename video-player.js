@@ -25,7 +25,7 @@
     video.refreshAnnotations = function() {
       video.annotations = [];
       video.deletedAnnotations = [];
-      $http.get('http://localhost:3000/annotations').success(function(data) {
+      $http.get('http://cheechcode.com/dabomb-api/annotations').success(function(data) {
         video.annotations = data;
         updateSaveButton();
       });
@@ -58,7 +58,7 @@
       if (index >= video.deletedAnnotations.length) return;
 
       $http.delete(
-          'http://localhost:3000/annotations/' + video.deletedAnnotations[index]
+          'http://cheechcode.com/dabomb-api/annotations/' + video.deletedAnnotations[index]
       ).success(function(data) {
         deleteServerAnnotations(index+1);
       });
@@ -88,7 +88,7 @@
 
     function saveNewAnnotation(index) {
       $http.post(
-        'http://localhost:3000/annotations',
+        'http://cheechcode.com/dabomb-api/annotations',
         savableAttributes(index),
         {
           headers: {
@@ -104,7 +104,7 @@
 
     function saveUpdatedAnnotation(index) {
       $http.put(
-        'http://localhost:3000/annotations/' + video.annotations[index].id,
+        'http://cheechcode.com/dabomb-api/annotations/' + video.annotations[index].id,
         savableAttributes(index),
         {
           headers: {
