@@ -2,6 +2,10 @@ video {
   width: 100%;
 }
 
+hr {
+  margin: 10px 0;
+}
+
 .headline {
   position: absolute;
   width: 250px;
@@ -64,7 +68,7 @@ progress {
 }
 
 .add-annotation-row {
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .input-box {
