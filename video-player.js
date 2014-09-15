@@ -9,7 +9,6 @@
   .controller('VideoController', [ '$http', function($http) {
     var video = this;
 
-    video.videoSrc = 'http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4';
     var provider = "http://cheechcode.com/dabomb-api";
 
     var videoPlayer,progressBar,headline;

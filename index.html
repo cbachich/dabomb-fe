@@ -20,9 +20,7 @@
 
     <!-- Video -->
     <div class="video-container">
-      <video id='video' controls>
-        <source src='{{videoCtrl.videoSrc}}' type='video/mp4'>
-      </video>
+      <video ng-src='http://video.bbemaildelivery.com/698ef524-730d-4afa-9e78-aea9d16ecf9f_LowDesktop.mp4' id='video' controls></video>
       <div ng-repeat="annotate in videoCtrl.annotations">
         <div id="headline-{{annotate.id}}" class="headline" my-draggable style="top: {{annotate.top_align}}; left: {{annotate.left_align}}; display: none;">
           <span style="color: {{annotate.color}}">{{annotate.text}}</span>
