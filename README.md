@@ -11,4 +11,4 @@ duration of display on the video. There is also an edit button on the right of
 a time line that can be used to change the text and color of the annotation
 being displayed.
 
-The annotations can by pulled or pushed to a server running the [DaBomb-API](https://github.com/cbachich/dabomb-api). Note: In order to save to the API, you must first Sync from Server. After that point, you can make changes to the annotations and select Save to Server to push those changes to the server.
+The annotations can be pulled or pushed to a server running the [DaBomb-API](https://github.com/cbachich/dabomb-api). Note: In order to save to the API, you must first Sync from Server. After that point, you can make changes to the annotations and select Save to Server to push those changes to the server.
